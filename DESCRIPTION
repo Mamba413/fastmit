@@ -1,0 +1,27 @@
+Package: fastmit
+Type: Package
+Title: Fast Mutual Information Based Independence Test
+Version: 0.1.1
+Authors@R: c(
+  person("Shiyun", "Lin", , "linshy27@mail2.sysu.edu.cn", c("aut", "cre")),
+  person("Jin", "Zhu", , "zhuj37@mail2.sysu.edu.cn", "aut"),
+  person("Wenliang", "Pan", role = "aut"), 
+  person("Xueqin", "Wang", , "wangxq88@mail.sysu.edu.cn", role = "aut"),
+  person("SC2S2", role = c("cph"))
+  ) 
+Description: Provide mutual information estimators based on k-nearest neighbor estimators. Use the estimated mutual information to implement independence test in metric spaces.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+LinkingTo: Rcpp, RcppArmadillo
+Imports: Rcpp, stats
+Suggests: testthat
+NeedsCompilation: yes
+Author: Shiyun Lin [aut, cre],
+  Jin Zhu [aut],
+  Wenliang Pan [aut],
+  Xueqin Wang [aut],
+  SC2S2 [cph]
+Maintainer: Shiyun Lin <linshy27@mail2.sysu.edu.cn>
+RoxygenNote: 6.1.1
+Packaged: 2019-12-04 11:50:47 UTC; Arwen

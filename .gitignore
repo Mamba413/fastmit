@@ -1,0 +1,7 @@
+R-package/.Rhistory
+R-package/.Rbuildignore
+*.o
+fastmit_0.1.1.tar.gz
+.Rhistory
+.Rbuildignore
+fastmit.Rproj
