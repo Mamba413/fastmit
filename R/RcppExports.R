@@ -5,3 +5,7 @@ knn_mi <- function(datax, datay, k) {
     .Call(`_fastmit_knn_mi`, datax, datay, k)
 }
 
+mi_test <- function(datax, datay, k, perm_num, ini_mi) {
+    .Call(`_fastmit_mi_test`, datax, datay, k, perm_num, ini_mi)
+}
+

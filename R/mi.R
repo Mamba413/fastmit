@@ -20,7 +20,7 @@
 #'(i.e. number of rows of the matrix or length of the vector) must agree.
 #'Moreover, data being passed to \code{x} and \code{y} must not contain missing or infinite values.
 #'
-#'@references Kraskov, A., Stogbauer, H., & Grassberger, P. (2004). Estimating mutual information. Physical review E 69(6): 066138.
+#'@references Kraskov, A., Stögbauer, H., & Grassberger, P. (2004). Estimating mutual information. Physical review E 69(6): 066138.
 #'
 #'@useDynLib fastmit, .registration = TRUE
 #'@export
@@ -46,7 +46,7 @@ mi <- function(x, y, k = 5, distance = FALSE) {
   stopifnot(all(is.finite(x)))
   stopifnot(all(is.finite(y)))
 
-  if (class(x) == "dist" && class(y) == "dist") {
+  if (class(x)[1] == "dist" && class(y)[1] == "dist") {
     distance <- TRUE
   }
   if (distance) {

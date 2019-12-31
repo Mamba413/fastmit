@@ -23,7 +23,7 @@ install.packages("fastmit")
 ```
 
 #### Github version
-You can intall the released version of fastmit from GitHub with:
+You can install the released version of fastmit from GitHub with:
 
 ``` r
 library(devtools)

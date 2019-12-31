@@ -28,7 +28,6 @@
 #'\code{mi.test} utilizes the Mutual Information statistics (see \code{\link{mi}})
 #'to measure dependence and derive a \eqn{p}-value via replicating the random permutation \code{num.permutations} times.
 #'
-#'@useDynLib fastmit, .registration = TRUE
 #'@export
 #'
 #'@examples
@@ -51,7 +50,7 @@ mi.test <- function(x, y, k = 5, distance = FALSE,
     data_name <- ""
   }
 
-  if (class(x) == "dist" && class(y) == "dist") {
+  if (class(x)[1] == "dist" && class(y)[1] == "dist") {
     distance <- TRUE
   }
   if (distance) {
@@ -70,15 +69,17 @@ mi.test <- function(x, y, k = 5, distance = FALSE,
 
   if(num.permutations == 0) return(ini_mi)
 
-  permuted_mi_value <- c()
-  for(r in 1:num.permutations)
-  {
-    set.seed(r + seed - 1)
-    targetindex <- sample(1:nrow(disty), nrow(disty), replace = F)
-    distypert <- disty[targetindex,targetindex]
-    permuted_mi_value[r] <- knn_mi(distx, distypert, k)
-  }
-  pvalue <- (sum(abs(permuted_mi_value) > abs(ini_mi)) + 1) / (1 + num.permutations)
+  # permuted_mi_value <- c()
+  # for(r in 1:num.permutations)
+  # {
+  #   set.seed(r + seed - 1)
+  #   targetindex <- sample(1:nrow(disty), nrow(disty), replace = FALSE)
+  #   distypert <- disty[targetindex,targetindex]
+  #   permuted_mi_value[r] <- knn_mi(distx, distypert, k)
+  # }
+  # pvalue <- (sum(abs(permuted_mi_value) > abs(ini_mi)) + 1) / (1 + num.permutations)
+  
+  pvalue <- mi_test(distx, disty, k, num.permutations, ini_mi)
 
   alternative_message <- "random variables are dependent"
   test_method <- "Mutual Information test of independence"

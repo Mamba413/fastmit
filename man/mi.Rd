@@ -46,5 +46,5 @@ disty <- dist(y)
 mi(distx, disty, k = 5, distance = TRUE)
 }
 \references{
-Kraskov, A., Stogbauer, H., & Grassberger, P. (2004). Estimating mutual information. Physical review E 69(6): 066138.
+Kraskov, A., Stögbauer, H., & Grassberger, P. (2004). Estimating mutual information. Physical review E 69(6): 066138.
 }

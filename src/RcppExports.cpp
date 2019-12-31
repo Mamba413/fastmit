@@ -19,9 +19,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mi_test
+double mi_test(arma::mat datax, arma::mat datay, int k, int perm_num, double ini_mi);
+RcppExport SEXP _fastmit_mi_test(SEXP dataxSEXP, SEXP dataySEXP, SEXP kSEXP, SEXP perm_numSEXP, SEXP ini_miSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type datax(dataxSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type datay(dataySEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type perm_num(perm_numSEXP);
+    Rcpp::traits::input_parameter< double >::type ini_mi(ini_miSEXP);
+    rcpp_result_gen = Rcpp::wrap(mi_test(datax, datay, k, perm_num, ini_mi));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastmit_knn_mi", (DL_FUNC) &_fastmit_knn_mi, 3},
+    {"_fastmit_mi_test", (DL_FUNC) &_fastmit_mi_test, 5},
     {NULL, NULL, 0}
 };
 

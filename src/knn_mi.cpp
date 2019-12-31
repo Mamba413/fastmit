@@ -4,6 +4,18 @@
 #include "sort_knn.h"
 // #include <boost/math/special_functions/digamma.hpp>
 #include <Rmath.h>
+#include <stdlib.h>
+// #include <random>
+// #include <time.h>
+
+#ifdef R_BUILD
+#include "R.h"
+#include "Rinternals.h"
+#else
+
+#include "time.h"
+
+#endif
 
 using namespace std;
 
@@ -103,3 +115,60 @@ double knn_mi(arma::mat datax,
   return mi;
 }
 
+void resample(arma::ivec& i_perm, int N) {
+#ifdef R_BUILD
+  GetRNGstate();
+  for(int i = N - 1; i > 0; --i) {
+    int j = ((int) round(RAND_MAX * unif_rand())) % (i + 1);
+    int temp = i_perm(j);
+    i_perm(j) = i_perm(i);
+    i_perm(i) = temp;
+  }
+  PutRNGstate();
+#else
+  srand((unsigned) time(NULL));
+  for(int i = N - 1; i > 0; --i) {
+    int j = rand() % (i + 1);
+    int temp = i_perm(j);
+    i_perm(j) = i_perm(i);
+    i_perm(i) = temp;
+  }
+#endif
+
+  // std::default_random_engine e;
+}
+
+// [[Rcpp::export]]
+double mi_test(arma::mat datax, arma::mat datay, 
+               int k, int perm_num, double ini_mi) {
+  int N = datax.n_rows;
+  arma::ivec i_perm(N);
+  arma::mat datay_pert(N, N);
+  arma::vec mi_list(perm_num);
+  
+  for(int i = 0; i < N; i++) {
+    i_perm(i) = i;
+  }
+  
+  for(int p = 0; p < perm_num; p++) {
+    resample(i_perm, N);
+
+    for(int i = 0; i < N; i++) {
+      for(int j = 0; j < N; j++) {
+        datay_pert(i, j) = datay(i_perm(i), i_perm(j));
+      }
+    }
+    
+    mi_list(p) = knn_mi(datax, datay_pert, k);
+  }
+  
+  int outlier_num = 0;
+  for(int i = 0; i < perm_num; i++) {
+    if(fabs(mi_list(i)) >= fabs(ini_mi)) {
+      outlier_num++;
+    }
+  }
+  double p_value = ((double)(1 + outlier_num)) / ((double)(1 + perm_num));
+  
+  return p_value;
+}

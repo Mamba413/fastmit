@@ -9,7 +9,7 @@ Authors@R: c(
   person("Xueqin", "Wang", , "wangxq88@mail.sysu.edu.cn", role = "aut"),
   person("SC2S2", role = c("cph"))
   ) 
-Description: Provide mutual information estimators based on k-nearest neighbor estimators. Use the estimated mutual information to implement independence test in metric spaces.
+Description: A mutual information estimator based on k-nearest neighbor method proposed by A. Kraskov, et al. (2004) <doi:10.1103/PhysRevE.69.066138> to measure general dependence and the time complexity for our estimator is only squared to the sample size, which is faster than other statistics. Besides, an implementation of mutual information based independence test is provided for analyzing multivariate data in Euclidean space (T B. Berrett, et al. (2019) <doi:10.1093/biomet/asz024>); furthermore, we extend it to tackle datasets in metric spaces.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
@@ -24,4 +24,6 @@ Author: Shiyun Lin [aut, cre],
   SC2S2 [cph]
 Maintainer: Shiyun Lin <linshy27@mail2.sysu.edu.cn>
 RoxygenNote: 6.1.1
-Packaged: 2019-12-04 11:50:47 UTC; Arwen
+Packaged: 2019-12-20 00:16:12 UTC; Arwen
+Repository: CRAN
+Date/Publication: 2019-12-30 14:00:07 UTC
